@@ -51,7 +51,10 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 // DATABASE
 // firebase firestore database
 export const db = getFirestore();
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalUserInfo = {}
+) => {
   if (!userAuth) return;
 
   // get user document reference of users document with the authenticated user id
@@ -76,6 +79,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         displayName,
         email,
         createdAt,
+        ...additionalUserInfo,
       });
     } catch (err) {
       console.log('Error creating the user', err.message);

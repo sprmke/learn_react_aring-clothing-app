@@ -23,7 +23,10 @@ const SignIn = () => {
   // }, []);
 
   const logGooglePopupUser = async () => {
+    // create firebase authentication user
     const { user } = await signInWithGooglePopup();
+
+    // save auth user to our users collection on the database
     if (user) {
       createUserDocumentFromAuth(user);
     }
