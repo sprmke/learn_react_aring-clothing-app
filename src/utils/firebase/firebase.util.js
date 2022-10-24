@@ -6,6 +6,8 @@ import {
   GoogleAuthProvider,
 } from 'firebase/auth';
 
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+
 const {
   REACT_APP_FIREBASE_API_KEY,
   REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -26,11 +28,26 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
+// initial firebase authentication with google provider
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
   prompt: 'select_account',
 });
-
 export const auth = getAuth();
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
+
+// initial firebase firestore database
+export const db = getFirestore();
+export const createUserDocumentFromAuth = async (userAuth) => {
+  // get user document reference of users document with the authenticated user id
+  const userDocRef = doc(db, 'users', userAuth.uid);
+  console.log('userDocRef::', userDocRef);
+
+  // get user document snapshot
+  const userSnapshot = await getDoc(userDocRef);
+  console.log('userSnapshot::', userSnapshot);
+
+  // check if user document snapshot exists on the database
+  console.log('userSnapshot.exists()::', userSnapshot.exists());
+};
