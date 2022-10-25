@@ -3,10 +3,18 @@ import { Link, Outlet } from 'react-router-dom';
 import { UserContext } from '../../contexts/user.context';
 import { ReactComponent as AppLogo } from '../../assets/crown.svg';
 import './navigation.styles.scss';
+import { signOutAuthUser } from '../../utils/firebase/firebase.util';
 
 const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
-  console.log('currentUser::', currentUser);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
+  const signOutHandler = async () => {
+    // signout user from firebase authentication
+    await signOutAuthUser();
+
+    // reset currentUser data from user context
+    setCurrentUser(null);
+  };
 
   return (
     <>
@@ -18,9 +26,15 @@ const Navigation = () => {
           <Link className='nav-link' to='/shop'>
             Shop
           </Link>
-          <Link className='nav-link' to='/sign-in'>
-            Sign In
-          </Link>
+          {currentUser ? (
+            <span className='nav-link' onClick={signOutHandler}>
+              Sign out
+            </span>
+          ) : (
+            <Link className='nav-link' to='/sign-in'>
+              Sign In
+            </Link>
+          )}
         </div>
       </div>
       <Outlet />

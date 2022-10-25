@@ -30,7 +30,7 @@ const SignInForm = () => {
     const { user } = await signInWithGooglePopup();
 
     if (user) {
-      // save to user context
+      // save auth user to user context
       setCurrentUser(user);
 
       // save auth user to our users collection on the database
@@ -50,7 +50,7 @@ const SignInForm = () => {
       const { user } = await signInWithEmailAndPassword();
 
       if (user) {
-        // save to user context
+        // save auth user to user context
         setCurrentUser(user);
       }
 
