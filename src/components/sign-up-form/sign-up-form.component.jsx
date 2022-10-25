@@ -95,8 +95,10 @@ const SignUpForm = () => {
           value={confirmPassword}
           onChange={handleChange}
         />
-        <Button type='submit'>Sign Up</Button>
-        <Button buttonType='google'>Google Sign Up</Button>
+        <div className='buttons-container'>
+          <Button type='submit'>Sign Up</Button>
+          <Button buttonType='google'>Google Sign Up</Button>
+        </div>
       </form>
     </div>
   );
