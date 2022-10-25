@@ -5,7 +5,7 @@ import {
 } from '../../utils/firebase/firebase.util';
 import Button from '../button/button.component';
 import FormInput from '../form-input/form-input.component';
-import './sign-up-form.style.scss';
+import './sign-up-form.styles.scss';
 
 const defaultFormFields = {
   displayName: '',
@@ -55,7 +55,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div>
+    <div className='sign-up-container'>
       <h2>Don't have an account?</h2>
       <span>Sign up with email and password</span>
       <form onSubmit={handleSubmit}>
@@ -69,7 +69,7 @@ const SignUpForm = () => {
         />
         <FormInput
           label='Email'
-          type='text'
+          type='email'
           name='email'
           required
           value={email}
@@ -77,7 +77,7 @@ const SignUpForm = () => {
         />
         <FormInput
           label='Password'
-          type='text'
+          type='password'
           name='password'
           required
           value={password}
@@ -85,15 +85,14 @@ const SignUpForm = () => {
         />
         <FormInput
           label='Confirm Password'
-          type='text'
+          type='password'
           name='confirmPassword'
           required
           value={confirmPassword}
           onChange={handleChange}
         />
-        <Button buttonType='google' type='submit'>
-          Sign Up
-        </Button>
+        <Button type='submit'>Sign Up</Button>
+        <Button buttonType='google'>Google Sign Up</Button>
       </form>
     </div>
   );
