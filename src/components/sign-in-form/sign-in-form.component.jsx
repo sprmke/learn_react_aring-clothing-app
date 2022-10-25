@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import {
-  createUserDocumentFromAuth,
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
 } from '../../utils/firebase/firebase.util';
@@ -24,12 +23,7 @@ const SignInForm = () => {
 
   const signInWithGoogle = async () => {
     // create firebase authentication user
-    const { user } = await signInWithGooglePopup();
-
-    if (user) {
-      // save auth user to our users collection on the database
-      createUserDocumentFromAuth(user);
-    }
+    await signInWithGooglePopup();
   };
 
   const signInWithEmailAndPassword = async () => {
