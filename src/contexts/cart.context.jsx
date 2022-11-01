@@ -1,15 +1,26 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 export const CartContext = createContext({
   isCartOpen: false,
   setIsCartOpen: () => {},
   cartItems: [],
   addProductToCart: () => {},
+  cartCount: 0,
 });
 
 export const CartProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    const cartTotalCount = cartItems.reduce(
+      (totalCount, cartItem) => totalCount + cartItem?.quantity,
+      0
+    );
+
+    setCartCount(cartTotalCount);
+  }, [cartItems]);
 
   const addProductToCart = (productToAdd) => {
     const productIndex = cartItems.findIndex(
@@ -25,9 +36,11 @@ export const CartProvider = ({ children }) => {
     } else {
       // if product exists, increase quantity
       setCartItems((prevCartItems) => {
-        const updatedCartItems = [...prevCartItems];
-        updatedCartItems[productIndex].quantity++;
-        return updatedCartItems;
+        return prevCartItems.map((cartItem) =>
+          cartItem.id === productToAdd.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        );
       });
     }
   };
@@ -37,6 +50,7 @@ export const CartProvider = ({ children }) => {
     setIsCartOpen,
     cartItems,
     addProductToCart,
+    cartCount,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
