@@ -1,5 +1,6 @@
-import { createContext, useState } from 'react';
-import PRODUCTS from '../shop-data.json';
+import { createContext, useEffect, useState } from 'react';
+import SHOP_DATA from '../shop-data';
+import { addCollectionAndDocuments } from '../utils/firebase/firebase.util';
 
 export const ProductContext = createContext({
   products: [],
@@ -7,7 +8,12 @@ export const ProductContext = createContext({
 });
 
 export const ProductProvider = ({ children }) => {
-  const [products, setProducts] = useState(PRODUCTS);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    // save our shop dummy data to firebase fitrestore
+    // addCollectionAndDocuments('categories', SHOP_DATA);
+  }, []);
 
   const value = {
     products,
