@@ -1,6 +1,9 @@
 import { createContext, useEffect, useState } from 'react';
 import SHOP_DATA from '../shop-data';
-import { addCollectionAndDocuments } from '../utils/firebase/firebase.util';
+import {
+  getCategoriesAndDocuments,
+  getCategoriesAndDocuments,
+} from '../utils/firebase/firebase.util';
 
 export const ProductContext = createContext({
   products: [],
@@ -13,6 +16,13 @@ export const ProductProvider = ({ children }) => {
   useEffect(() => {
     // save our shop dummy data to firebase fitrestore
     // addCollectionAndDocuments('categories', SHOP_DATA);
+
+    const getCategoriesMap = async () => {
+      const categoryMap = await getCategoriesAndDocuments();
+      console.log(categoryMap);
+    };
+
+    getCategoriesMap();
   }, []);
 
   const value = {
