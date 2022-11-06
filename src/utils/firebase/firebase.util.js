@@ -102,7 +102,7 @@ export const getCategoriesAndDocuments = async () => {
 
   // restructure our categories to have cateogry: items format
   const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    const { title, items } = docSnapshot;
+    const { title, items } = docSnapshot.data();
     acc[title.toLowerCase()] = items;
 
     return acc;
