@@ -3,7 +3,7 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from '../../utils/firebase/firebase.util';
-import Button from '../button/button.component';
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import FormInput from '../form-input/form-input.component';
 import './sign-up-form.styles.scss';
 
@@ -101,7 +101,9 @@ const SignUpForm = () => {
         />
         <div className='buttons-container'>
           <Button type='submit'>Sign Up</Button>
-          <Button buttonType='google'>Google Sign Up</Button>
+          <Button buttonType={BUTTON_TYPE_CLASSES.google}>
+            Google Sign Up
+          </Button>
         </div>
       </form>
     </div>
