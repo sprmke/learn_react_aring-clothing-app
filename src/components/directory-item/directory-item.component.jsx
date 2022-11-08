@@ -3,9 +3,11 @@ import {
   BackgroundImage,
   Body,
   DirectoryItemContainer,
-} from './directory-item.styles.jsx';
+} from './directory-item.styles';
 
-const DirectoryItem = ({ title, imageUrl, route }) => {
+const DirectoryItem = ({ category }) => {
+  const { title, imageUrl, route } = category;
+
   const navigate = useNavigate();
 
   const onNavigateHandler = () => navigate(route);

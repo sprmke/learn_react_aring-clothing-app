@@ -3,9 +3,9 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from '../../utils/firebase/firebase.util';
-import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
+import Button from '../button/button.component';
 import FormInput from '../form-input/form-input.component';
-import './sign-up-form.styles.scss';
+import { SignUpContainer } from './sign-up-form.styles';
 
 const defaultFormFields = {
   displayName: '',
@@ -63,50 +63,48 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className='sign-up-container'>
+    <SignUpContainer>
       <h2>Don't have an account?</h2>
-      <span>Sign up with email and password</span>
+      <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
-          label='Name'
+          label='Display Name'
           type='text'
-          name='displayName'
           required
-          value={displayName}
           onChange={handleChange}
+          name='displayName'
+          value={displayName}
         />
+
         <FormInput
           label='Email'
           type='email'
-          name='email'
           required
-          value={email}
           onChange={handleChange}
+          name='email'
+          value={email}
         />
+
         <FormInput
           label='Password'
           type='password'
-          name='password'
           required
-          value={password}
           onChange={handleChange}
+          name='password'
+          value={password}
         />
+
         <FormInput
           label='Confirm Password'
           type='password'
-          name='confirmPassword'
           required
-          value={confirmPassword}
           onChange={handleChange}
+          name='confirmPassword'
+          value={confirmPassword}
         />
-        <div className='buttons-container'>
-          <Button type='submit'>Sign Up</Button>
-          <Button buttonType={BUTTON_TYPE_CLASSES.google}>
-            Google Sign Up
-          </Button>
-        </div>
+        <Button type='submit'>Sign Up</Button>
       </form>
-    </div>
+    </SignUpContainer>
   );
 };
 
