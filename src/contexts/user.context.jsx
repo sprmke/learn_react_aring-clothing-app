@@ -3,6 +3,7 @@ import {
   onAuthStateChangedListener,
   createUserDocumentFromAuth,
 } from '../utils/firebase/firebase.util';
+import { createAction } from '../utils/reducer/reducer.util';
 
 export const UserContext = createContext({
   currentUser: null,
@@ -42,10 +43,7 @@ export const UserProvider = ({ children }) => {
   );
 
   const setCurrentUser = (user) => {
-    dispatchUser({
-      type: USER_ACTION_TYPES.SET_CURRENT_USER,
-      payload: user,
-    });
+    dispatchUser(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user));
   };
 
   const value = { currentUser, setCurrentUser };
