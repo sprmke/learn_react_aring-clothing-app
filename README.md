@@ -1,4 +1,4 @@
-# Learn React: Aring Clothing E-commerce App
+# React: Aring Clothing E-commerce App
 
 ##### Course:
 
