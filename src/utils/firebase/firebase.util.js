@@ -101,14 +101,7 @@ export const getCategoriesAndDocuments = async () => {
   const querySnapshot = await getDocs(q);
 
   // restructure our categories to have cateogry: items format
-  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    const { title, items } = docSnapshot.data();
-    acc[title.toLowerCase()] = items;
-
-    return acc;
-  }, {});
-
-  return categoryMap;
+  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 };
 
 export const createUserDocumentFromAuth = async (
