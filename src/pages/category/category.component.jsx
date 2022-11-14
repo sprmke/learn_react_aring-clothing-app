@@ -8,13 +8,14 @@ import { CategoryContainer, Title, EmptyCategory } from './category.styles';
 
 const Category = () => {
   const { category } = useParams();
+  console.log('render/re-rendering category component::');
   const categoriesMap = useSelector(selectCategoriesMap);
-
   const [products, setProducts] = useState([]);
 
   const categoryData = categoriesMap[category];
 
   useEffect(() => {
+    console.log('effect fired calling setProducts::');
     if (categoryData) {
       setProducts(categoryData);
     }
