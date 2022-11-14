@@ -10,22 +10,18 @@ const Category = () => {
   const { category } = useParams();
   console.log('render/re-rendering category component::');
   const categoriesMap = useSelector(selectCategoriesMap);
-  const [products, setProducts] = useState([]);
-
-  const categoryData = categoriesMap[category];
+  const [products, setProducts] = useState(categoriesMap[category]);
 
   useEffect(() => {
     console.log('effect fired calling setProducts::');
-    if (categoryData) {
-      setProducts(categoryData);
-    }
-  }, [category, categoryData]);
+    setProducts(categoriesMap[category]);
+  }, [category, categoriesMap]);
 
   let content = (
     <EmptyCategory>No products found for '{category}' category</EmptyCategory>
   );
 
-  if (products.length > 0) {
+  if (products && products.length > 0) {
     content = (
       <>
         <Title>{category.toUpperCase()}</Title>
